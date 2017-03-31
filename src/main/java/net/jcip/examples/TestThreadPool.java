@@ -1,9 +1,9 @@
 package net.jcip.examples;
 
+import org.junit.Assert;
+
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
-
-import junit.framework.TestCase;
 
 /**
  * TestingThreadFactory
@@ -12,7 +12,7 @@ import junit.framework.TestCase;
  *
  * @author Brian Goetz and Tim Peierls
  */
-public class TestThreadPool extends TestCase {
+public class TestThreadPool {
 
     private final TestingThreadFactory threadFactory = new TestingThreadFactory();
 
@@ -34,7 +34,7 @@ public class TestThreadPool extends TestCase {
              i < 20 && threadFactory.numCreated.get() < MAX_SIZE;
              i++)
             Thread.sleep(100);
-        assertEquals(threadFactory.numCreated.get(), MAX_SIZE);
+        Assert.assertEquals(threadFactory.numCreated.get(), MAX_SIZE);
         exec.shutdownNow();
     }
 }

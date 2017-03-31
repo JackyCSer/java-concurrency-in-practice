@@ -1,6 +1,7 @@
 package net.jcip.examples;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+
 import java.math.BigInteger;
 import java.util.*;
 import java.util.concurrent.*;
@@ -18,8 +19,8 @@ import net.jcip.annotations.*;
 public class PrimeGenerator implements Runnable {
     private static ExecutorService exec = Executors.newCachedThreadPool();
 
-    @GuardedBy("this") private final List<BigInteger> primes
-            = new ArrayList<BigInteger>();
+    @GuardedBy("this")
+    private final List<BigInteger> primes = new ArrayList<BigInteger>();
     private volatile boolean cancelled;
 
     public void run() {
@@ -49,5 +50,9 @@ public class PrimeGenerator implements Runnable {
             generator.cancel();
         }
         return generator.get();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println(aSecondOfPrimes());
     }
 }
